@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "scripts": {
-    "start": "cd server && nodemon server.js",
+    "start": "cd server && node server.js",
     "dev": "cd client && npm start",
     "test": "cd client && npm test",
     "preinstall": "cd server && npm install",
