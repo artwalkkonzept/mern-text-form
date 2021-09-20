@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React,  {Component}  from "react";
 // This will require to npm install axios
-import axios from 'axios';
+import axios from "axios";
+import { withRouter } from "react-router";
 
-export default class Create extends Component {
+class Edit extends Component {
   // This is the constructor that stores the data.
   constructor(props) {
     super(props);
@@ -16,7 +17,23 @@ export default class Create extends Component {
       person_name: "",
       person_position: "",
       person_level: "",
+      records: [],
     };
+  }
+  // This will get the record based on the id from the database.
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/record/" + this.props.match.params.id)
+      .then((response) => {
+        this.setState({
+          person_name: response.data.person_name,
+          person_position: response.data.person_position,
+          person_level: response.data.person_level,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   // These methods will update the state properties.
@@ -38,37 +55,35 @@ export default class Create extends Component {
     });
   }
 
-// This function will handle the submission.
+  // This function will handle the submission.
   onSubmit(e) {
     e.preventDefault();
-
-    // When post request is sent to the create url, axios will add a new record(newperson) to the database.
-    const newperson = {
+    const newEditedperson = {
       person_name: this.state.person_name,
       person_position: this.state.person_position,
       person_level: this.state.person_level,
     };
+    console.log(newEditedperson);
 
+    // This will send a post request to update the data in the database.
     axios
-      .post("http://localhost:5000/record/add", newperson)
+      .post(
+        "http://localhost:5000/update/" + this.props.match.params.id,
+        newEditedperson
+      )
       .then((res) => console.log(res.data));
 
-    // We will empty the state after posting the data to the database
-    this.setState({
-      person_name: "",
-      person_position: "",
-      person_level: "",
-    });
+    this.props.history.push("/");
   }
 
-  // This following section will display the form that takes the input from the user.
+  // This following section will display the update-form that takes the input from the user to update the data.
   render() {
     return (
-      <div style={{ marginTop: 20 }}>
-        <h3>Create New Record</h3>
+      <div>
+        <h3 align="center">Update Record</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Name of the person: </label>
+            <label>Person's Name: </label>
             <input
               type="text"
               className="form-control"
@@ -77,7 +92,7 @@ export default class Create extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Person's position: </label>
+            <label>Position: </label>
             <input
               type="text"
               className="form-control"
@@ -123,10 +138,12 @@ export default class Create extends Component {
               <label className="form-check-label">Senior</label>
             </div>
           </div>
+          <br />
+
           <div className="form-group">
             <input
               type="submit"
-              value="Create person"
+              value="Update Record"
               className="btn btn-primary"
             />
           </div>
@@ -135,3 +152,8 @@ export default class Create extends Component {
     );
   }
 }
+
+// You can get access to the history object's properties and the closest <Route>'s match via the withRouter
+// higher-order component. This makes it easier for us to edit our records.
+
+export default withRouter(Edit);

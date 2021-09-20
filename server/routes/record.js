@@ -36,8 +36,9 @@ recordRoutes.route("/record/:id").get(function (req, res) {
 recordRoutes.route("/record/add").post(function (req, res) {
   let db_connect = dbo.getDb("employees");
   let myobj = {
-    article_title: req.body.article_title,
-    article_description: req.body.article_description,
+    person_name: req.body.person_name,
+    person_position: req.body.person_position,
+    person_level: req.body.person_level,
   };
   db_connect.collection("records").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -50,8 +51,9 @@ recordRoutes.route("/update/:id").post(function (req, res) {
   let myquery = { id: req.body.id };
   let newvalues = {
     $set: {
-      article_title: req.body.article_title,
-      article_description: req.body.article_description,
+      person_name: req.body.person_name,
+      person_position: req.body.person_position,
+      person_level: req.body.person_level,
     },
   };
   db_connect
@@ -60,6 +62,16 @@ recordRoutes.route("/update/:id").post(function (req, res) {
       if (err) throw err;
       console.log("1 document updated");
     });
+});
+
+// This section will help you delete a record
+recordRoutes.route("/:id").delete((req, res) => {
+  let db_connect = dbo.getDb("employees");
+  var myquery = { id: req.body.id };
+  db_connect.collection("records").deleteOne(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("1 document deleted");
+  });
 });
 
 module.exports = recordRoutes;
