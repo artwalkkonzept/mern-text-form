@@ -23,15 +23,18 @@ export default class RecordList extends Component {
  
   // This method will get the data from the database.
   componentDidMount() {
-    axios.get("http://localhost:5000/record/")
-      .then(function (response) {
+    axios
+      .get("http://localhost:5000/record/")
+      .then((response) => {
         this.setState({ records: response.data });
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-  
+
+ 
+ 
   // This method will map out the users on the table
   recordList() {
     return this.state.records.map((currentrecord) => {
