@@ -24,7 +24,7 @@ export default class RecordList extends Component {
   // This method will get the data from the database.
   componentDidMount() {
     axios
-      .get("http://localhost:5000/record/")
+      .get("/api/record/")
       .then((response) => {
         this.setState({ records: response.data });
       })
