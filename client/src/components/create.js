@@ -41,7 +41,7 @@ onSubmit(e) {
   };
 
   axios.post("http://localhost:5000/record/add", newarticle)
-    .then((res) => console.log(res.data));
+    .then(response => console.log.innerHTML = response.data.id )
 
   // We will empty the state after posting the data to the database
   this.setState({
