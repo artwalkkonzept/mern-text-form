@@ -42,7 +42,7 @@ const artwalkDB = require('./db/conn')(mongoose);
 
 
 /**** Start ****/
-const url = process.env.MONGO_URL || 'mongodb://localhost/artwalk_db';
+const url = process.env.MONGO_URL || 'mongodb://localhost/conn';
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(async () => {
         await artwalkDB.bootstrap(); // Fill in test data if needed.
