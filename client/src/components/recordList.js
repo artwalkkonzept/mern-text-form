@@ -24,8 +24,8 @@ export default class RecordList extends Component {
   // This method will get the data from the database.
   componentDidMount() {
     axios
-      .get("https://git.heroku.com/artwalkapp.git/record/")
-      .then((response) => {
+      .get("../record/")
+      .then(function (response) {
         this.setState({ records: response.data });
       })
       .catch(function (error) {
@@ -33,8 +33,6 @@ export default class RecordList extends Component {
       });
   }
 
- 
- 
   // This method will map out the users on the table
   recordList() {
     return this.state.records.map((currentrecord) => {
