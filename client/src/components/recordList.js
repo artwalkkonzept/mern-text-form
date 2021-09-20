@@ -24,7 +24,7 @@ export default class RecordList extends Component {
   // This method will get the data from the database.
   componentDidMount() {
     axios
-      .get("../record/")
+      .get("https://artwalkapp.herokuapp.com/api/record/")
       .then(function (response) {
         this.setState({ records: response.data });
       })
