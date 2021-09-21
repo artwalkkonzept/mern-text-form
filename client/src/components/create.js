@@ -41,7 +41,7 @@ onSubmit(e) {
   };
 
   axios
-    .post("/record/add", newarticle)
+    .post("https://artwalkapp.herokuapp.com/record/add", newarticle)
     .then((res) => console.log(res.data));
 
   // We will empty the state after posting the data to the database
