@@ -2,7 +2,7 @@
   "name": "mern_heroku_mongodb",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "https://artwalkapp.herokuapp.com",
   "scripts": {
     "start": "cd server && nodemon server.js",
     "dev": "cd client && npm start",
