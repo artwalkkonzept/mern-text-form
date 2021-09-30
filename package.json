@@ -1,17 +1,16 @@
 {
-  "name": "mern_heroku_mongodb",
+  "name": "artwalk-mern-app",
   "version": "1.0.0",
-  "private": true,
-  "proxy": "https://artwalkapp.herokuapp.com",
   "scripts": {
-    "start": "cd server && nodemon server.js",
-    "dev": "cd client && npm start",
-    "test": "cd client && npm test",
+    "start": "cd server && npm start",
+    "react-dev": "cd client && npm start",
+    "test": "cd server && npm test",
     "preinstall": "cd server && npm install",
     "install": "cd client && npm install",
     "build": "cd client && npm run build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "license": "ISC",
+  "dependencies": {
+    "redux-thunk": "^2.3.0"
   }
 }

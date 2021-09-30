@@ -1,27 +1,47 @@
-import React from "react";
+import { useSelector } from 'react-redux'
+import { Router } from "@reach/router";
+import Artwalk from "./Artwalk";
+import Artwalks from "./Artwalks";
+//import {postArtwalk, postBild} from "./actions";
 
-// We use Route in order to define the different routes of our application
-import { Route } from "react-router-dom";
+function App() {
+ // const dispatch = useDispatch()
 
-// We import all the components we need in our app
-import Navbar from "./components/navbar";
-import Edit from "./components/edit";
-import Create from "./components/create";
-import RecordList from "./components/recordList";
+  // We get state from the redux store using a selector function that selects 
+  // the part of the state that we are interested in.
+  const artwalks = useSelector(state => state.artwalks);
 
-const App = () => {
+  // Helper function for finding a artwalk by id 
+  function getArtwalk(id) {
+    return artwalks.find(artwalk => artwalk._id === id);
+  }
+
+  // Helper function for dispatching the ADD_BILD action
+  /*function addBild(artwalkId, bild) {
+    return dispatch(postBild(artwalkId, bild));
+  }*/
+
+  // Helper function for dispatching the ADD_ARTWALK action
+  /*function addArtwalk(name) {
+    return dispatch(postArtwalk(name));
+  }*/
+
+  // Helper function for dispatching the DELETE_ARTWALK action
+  //function deleteArtwalk(id) {
+    // TODO: Implement!
+  //}
+
   return (
-    <div>
-      <Navbar />
-      <Route exact path="/">
-        <RecordList />
-      </Route>
-      <Route path="/edit/:id" component={Edit} />
-      <Route path="/create">
-        <Create />
-      </Route>
-    </div>
+    <>
+      <Router>
+        <Artwalk path="/artwalk/:id" getArtwalk={getArtwalk} />
+        <Artwalks path="/" artwalks={artwalks} />
+      </Router>
+    </>
   );
-};
+}
 
 export default App;
+
+
+//<Artwalk path="/artwalk/:id" getArtwalk={getArtwalk} addBild={addBild} />
