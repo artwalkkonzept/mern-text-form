@@ -28,5 +28,6 @@ module.exports = (db) => {
     res.json(updatedArtwalk);
   });
 
+  
   return router;
 };

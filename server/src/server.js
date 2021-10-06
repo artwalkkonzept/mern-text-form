@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 /**** Configuration ****/
 const app = express();
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/test'; 
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/artwalks'; 
 
 async function createServer() {
   // Connect db

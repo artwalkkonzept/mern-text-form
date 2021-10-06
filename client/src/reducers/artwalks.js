@@ -17,7 +17,9 @@ function artwalks(state = [], action) {
       return state.map(artwalk => artwalk._id === action.artwalkId ?
         { ...artwalk, bilds: [...artwalk.bilds, action.bild] } : artwalk);
     }
-    
+    case 'DELETE_ARTWALK': {
+      return state; // TODO: Implement artwalk deletion!
+    }
     default: return state;
   }
 }

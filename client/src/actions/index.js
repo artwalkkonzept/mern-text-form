@@ -22,3 +22,27 @@ export const fetchArtwalks = _ => async function (dispatch) {
     dispatch(addArtwalk(artwalk._id, artwalk.name, artwalk.bilds));
   }
 };
+
+export const postArtwalk = (name) => async function (dispatch) {
+  const response = await fetch(`${API_URL}/artwalks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify({ name: name })
+  });
+  const newArtwalk = await response.json();
+  dispatch(addArtwalk(newArtwalk._id, newArtwalk.name, newArtwalk.bilds));
+};
+
+export const postBild = (artwalkId, bild) => async function (dispatch) {
+  const response = await fetch(`${API_URL}/artwalks/${artwalkId}/bilds`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify({ bild: bild })
+  });
+  const artwalk = await response.json();
+  dispatch(addBild(artwalk._id, bild));
+};
